@@ -1,5 +1,17 @@
+import { Container } from 'react-bootstrap';
+import Header from './components/Header';
+
 const App = () => {
-  return <div>Welcome to Geekly Shop</div>;
+  return (
+    <>
+      <Header />
+      <main className="py-3">
+        <Container>
+          <h1>Welcome to Geekly Shop</h1>
+        </Container>
+      </main>
+    </>
+  );
 };
 
 export default App;
