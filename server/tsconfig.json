@@ -19,6 +19,8 @@
     "sourceMap": true,
     "outDir": "./dist",
     "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
 
     /* Interop Constraints */
     "allowSyntheticDefaultImports": true,
