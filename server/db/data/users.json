@@ -1,0 +1,11 @@
+[
+  {
+    "email": "geekly_admin@email.com",
+    "password": "Test1234*",
+    "isAdmin": true
+  },
+  {
+    "email": "geekly_user@email.com",
+    "password": "Test1234*"
+  }
+]
