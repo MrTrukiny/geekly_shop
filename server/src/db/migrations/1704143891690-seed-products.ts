@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { ProductEntity } from '../../src/product/product.entity';
-import { UserEntity } from '../../src/user/user.entity';
+import { ProductEntity } from '@/product/product.entity';
+import { UserEntity } from '@/user/user.entity';
 import productSeedData from '../data/products.json';
 
 export class SeedProducts1704143891690 implements MigrationInterface {

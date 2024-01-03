@@ -1,4 +1,4 @@
-import { AppDataSource } from 'db/data-source';
+import { AppDataSource } from '@/db/data-source';
 import { ProductEntity } from './product.entity';
 import { asyncHandler } from '@/middlewares/async-handler.middleware';
 

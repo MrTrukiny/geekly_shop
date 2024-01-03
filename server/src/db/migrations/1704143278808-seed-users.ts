@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { UserEntity } from '../../src/user/user.entity';
+import { UserEntity } from '@/user/user.entity';
 import usersData from '../data/users.json';
 
 export class SeedUsers1704143278808 implements MigrationInterface {

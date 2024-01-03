@@ -9,6 +9,7 @@
     /* Modules */
     "module": "ESNext",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]

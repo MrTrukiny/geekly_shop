@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { AppDataSource } from './data-source';
 
 export const Database = AppDataSource.initialize()

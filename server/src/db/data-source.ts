@@ -13,6 +13,6 @@ export const AppDataSource = new DataSource({
   synchronize: true, // TODO: Disable in production because it drops the database
   logging: true,
   entities: [UserEntity, ProductEntity, ReviewEntity, OrderEntity, ShippingAddressEntity, PaymentResultEntity],
-  migrations: ['db/migrations/**/*.ts'],
+  migrations: ['src/db/migrations/**/*.ts'],
   subscribers: [],
 });
