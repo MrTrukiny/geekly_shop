@@ -2,8 +2,11 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap';
 
-import Rating from '@/components/Rating.component.';
 import { useGetProductDetailsQuery } from '@/state/slices/products-api.slice';
+
+import Rating from '@/components/Rating.component.';
+import Loader from '@/components/Loader.component';
+import Message from '@/components/Message.component';
 
 const ProductView = () => {
   const { id: productId } = useParams<{ id: string }>();
@@ -16,9 +19,9 @@ const ProductView = () => {
       </Link>
 
       {isLoading ? (
-        <h2>Loading...</h2>
+        <Loader />
       ) : error ? (
-        <div>{(error as SerializedError).message}</div>
+        <Message variant='danger'>{(error as SerializedError).message}</Message>
       ) : (
         <>
           {product && (

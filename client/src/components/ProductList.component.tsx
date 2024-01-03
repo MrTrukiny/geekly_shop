@@ -1,18 +1,20 @@
+import { SerializedError } from '@reduxjs/toolkit';
 import { Row, Col } from 'react-bootstrap';
 import Product from './Product.component';
 import { useGetProductsQuery } from '@/state/slices/products-api.slice';
-import { SerializedError } from '@reduxjs/toolkit';
+
+import Loader from './Loader.component';
+import Message from './Message.component';
 
 const ProductList = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
-  console.log(products);
 
   return (
     <>
       {isLoading ? (
-        <h2>Loading...</h2>
+        <Loader />
       ) : error ? (
-        <div>{(error as SerializedError).message}</div>
+        <Message variant="danger">{(error as SerializedError).message}</Message>
       ) : (
         <Row>
           {products &&
