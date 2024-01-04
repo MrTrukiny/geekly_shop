@@ -3,7 +3,7 @@ import { RequestWithUser } from '@/types/api.types';
 
 import { asyncHandler } from './async-handler.middleware';
 import { decodeToken } from '@/auth/auth.helpers';
-import { userModel } from '@/user/user.model';
+import { userModel } from '@/db/models';
 
 const isAuthenticated = asyncHandler(async (req, res, next) => {
   const token = req.cookies?.jwt;
@@ -34,7 +34,7 @@ const isAuthenticated = asyncHandler(async (req, res, next) => {
 
 const isAdmin = (req: Request, res: Response, next: NextFunction) => {
   const reqUser = req as RequestWithUser;
-  if (!reqUser.user || !reqUser.user.isAdmin) {
+  if (!reqUser.user?.isAdmin) {
     res.status(401);
     throw new Error('Not authorized as an Admin');
   }

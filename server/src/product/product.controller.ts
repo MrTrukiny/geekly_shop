@@ -1,5 +1,5 @@
 import { asyncHandler } from '@/middlewares/async-handler.middleware';
-import { productModel } from './product.model';
+import { productModel } from '@/db/models';
 
 const getProducts = asyncHandler(async (req, res) => {
   const products = await productModel.find();

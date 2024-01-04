@@ -7,12 +7,10 @@ import {
   UpdateDateColumn,
   JoinColumn,
   OneToOne,
+  OneToMany,
 } from 'typeorm';
-import { UserEntity } from '@/user/user.entity';
-import { ProductEntity } from '@/product/product.entity';
-import { PaymentResultEntity } from './payment-result.entity';
-import { ShippingAddressEntity } from './shipping-address.entity';
 import { OrderStatus } from '../order.types';
+import { CartEntity, ShippingAddressEntity, PaymentResultEntity, UserEntity } from '@/db/entities';
 
 @Entity('orders')
 export class OrderEntity {
@@ -54,6 +52,9 @@ export class OrderEntity {
   status!: OrderStatus;
 
   /* Relations */
+  @OneToMany(() => CartEntity, (orderItem) => orderItem.order, { cascade: true })
+  orderItems!: CartEntity[];
+
   @OneToOne(() => ShippingAddressEntity, (shippingAddress) => shippingAddress.order, { cascade: true })
   @JoinColumn()
   shippingAddress!: ShippingAddressEntity;
@@ -64,9 +65,6 @@ export class OrderEntity {
 
   @ManyToOne(() => UserEntity, (user) => user.orders)
   user!: UserEntity;
-
-  @ManyToOne(() => ProductEntity)
-  product!: ProductEntity;
 
   /* Timestamps */
   @CreateDateColumn({ name: 'createdAt' })

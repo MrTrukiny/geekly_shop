@@ -16,7 +16,7 @@ export class PaymentResultEntity {
   updateTime?: string;
 
   @Column({ type: 'text', nullable: true })
-  emailAddress?: string;
+  email?: string;
 
   @OneToOne(() => OrderEntity, (order) => order.paymentResult)
   order!: OrderEntity;

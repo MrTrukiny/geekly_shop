@@ -5,9 +5,8 @@ export const addDecimals = (num: number) => {
 };
 
 export const updateCart = (state: CartSliceState) => {
-  // Calculate the items price in whole number (pennies) to avoid issues with
-  // floating point number calculations
-  const itemsPrice = state.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  // Calculate the items price in whole number (pennies) to avoid issues with floating point number calculations
+  const itemsPrice = state.cartItems.reduce((acc, item) => acc + (item.price * 100 * item.quantity) / 100, 0);
   state.itemsPrice = addDecimals(itemsPrice);
 
   // Calculate the shipping price

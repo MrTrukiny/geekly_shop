@@ -1,5 +1,13 @@
 import { Router } from 'express';
-import { getUsers, getUserById, updateUser, deleteUser, getUserProfile, updateUserProfile } from './user.controller';
+import {
+  getUserProfile,
+  updateUserProfile,
+  createUser,
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+} from './user.controller';
 import { isAuthenticated, isAdmin } from '@/middlewares/auth.middleware';
 
 const userRouter = Router();
@@ -8,7 +16,7 @@ const userRouter = Router();
 userRouter.route('/profile').get(isAuthenticated, getUserProfile).put(isAuthenticated, updateUserProfile);
 
 /* Admin routes */
-userRouter.route('/').get(isAuthenticated, isAdmin, getUsers);
+userRouter.route('/').get(isAuthenticated, isAdmin, getUsers).post(isAuthenticated, isAdmin, createUser);
 userRouter
   .route('/:userId')
   .get(isAuthenticated, isAdmin, getUserById)

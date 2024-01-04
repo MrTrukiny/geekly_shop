@@ -1,11 +1,12 @@
 import { asyncHandler } from '@/middlewares/async-handler.middleware';
-import { userModel } from './user.model';
 import { RequestWithUser } from '@/types/api.types';
+import { ReqCreateUserBody } from './user.types';
+import { userModel } from '@/db/models';
 import { encryptPassword } from '@/auth/auth.helpers';
 
 const getUserProfile = asyncHandler(async (req, res) => {
   const { id } = (req as RequestWithUser).user;
-  console.log('The longest id', id);
+
   const user = await userModel.findOneBy({ id });
 
   if (!user) {
@@ -47,6 +48,35 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   });
 });
 
+/* Admin */
+const createUser = asyncHandler(async (req: ReqCreateUserBody, res) => {
+  const { email, password, isAdmin } = req.body;
+
+  const existingUser = await userModel.findOneBy({ email });
+
+  if (existingUser) {
+    res.status(400);
+    throw new Error('User already exists');
+  }
+
+  const user = await userModel.save({
+    email,
+    password: await encryptPassword(password),
+    isAdmin: isAdmin,
+  });
+
+  if (!user) {
+    res.status(400);
+    throw new Error('Invalid user data');
+  }
+
+  res.status(201).json({
+    id: user.id,
+    email: user.email,
+    isAdmin: user.isAdmin,
+  });
+});
+
 const getUsers = asyncHandler(async (req, res) => {
   const users = await userModel.find();
 
@@ -81,11 +111,12 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error('User not found');
   }
 
-  user.email = email || user.email;
-  user.isAdmin = Boolean(isAdmin);
-  user.password = (await encryptPassword(password)) || user.password;
-
-  const updatedUser = await userModel.save(user);
+  const updatedUser = await userModel.save({
+    ...user,
+    email: email || user.email,
+    password: (await encryptPassword(password)) || user.password,
+    isAdmin: Boolean(isAdmin),
+  });
 
   res.json({
     id: updatedUser.id,
@@ -113,4 +144,4 @@ const deleteUser = asyncHandler(async (req, res) => {
   return res.status(200).json({ message: 'User removed' });
 });
 
-export { getUserProfile, updateUserProfile, getUsers, deleteUser, getUserById, updateUser };
+export { getUserProfile, updateUserProfile, createUser, getUsers, deleteUser, getUserById, updateUser };
