@@ -9,7 +9,7 @@ import { PaymentResultEntity } from '@/order/entities/payment-result.entity';
 
 export const AppDataSource = new DataSource({
   type: 'sqlite',
-  database: 'db/data/geekly_shop.sqlite',
+  database: 'src/db/data/geekly_shop.sqlite',
   synchronize: true, // TODO: Disable in production because it drops the database
   logging: true,
   entities: [UserEntity, ProductEntity, ReviewEntity, OrderEntity, ShippingAddressEntity, PaymentResultEntity],

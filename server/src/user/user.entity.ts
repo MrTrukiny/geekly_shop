@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import bcrypt from 'bcrypt';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { OrderEntity } from '@/order/entities/order.entity';
 import { ReviewEntity } from '@/user/review/review.entity';
 import { ProductEntity } from '@/product/product.entity';
@@ -11,7 +12,7 @@ export class UserEntity {
   @Column({ type: 'varchar' })
   email!: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', select: false })
   password!: string;
 
   @Column({ type: 'boolean', default: false })
@@ -33,4 +34,8 @@ export class UserEntity {
 
   @UpdateDateColumn({ name: 'updatedAt' })
   updatedAt!: Date;
+
+  async matchPassword(attempt: string): Promise<boolean> {
+    return await bcrypt.compare(attempt, this.password);
+  }
 }
