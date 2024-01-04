@@ -1,12 +1,11 @@
-import { AppDataSource } from '@/db/data-source';
 import { asyncHandler } from '@/middlewares/async-handler.middleware';
-import { UserEntity } from './user.entity';
+import { userModel } from './user.model';
 import { RequestWithUser } from '@/types/api.types';
-
-const userModel = AppDataSource.getRepository(UserEntity);
+import { encryptPassword } from '@/auth/auth.helpers';
 
 const getUserProfile = asyncHandler(async (req, res) => {
   const { id } = (req as RequestWithUser).user;
+  console.log('The longest id', id);
   const user = await userModel.findOneBy({ id });
 
   if (!user) {
@@ -37,7 +36,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 
   user.email = email || user.email;
-  user.password = password || user.password;
+  user.password = (await encryptPassword(password)) || user.password;
 
   const updatedUser = await userModel.save(user);
 
@@ -84,7 +83,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
   user.email = email || user.email;
   user.isAdmin = Boolean(isAdmin);
-  user.password = password || user.password;
+  user.password = (await encryptPassword(password)) || user.password;
 
   const updatedUser = await userModel.save(user);
 

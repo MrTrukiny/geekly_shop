@@ -1,8 +1,5 @@
-import { AppDataSource } from '@/db/data-source';
-import { ProductEntity } from './product.entity';
 import { asyncHandler } from '@/middlewares/async-handler.middleware';
-
-const productModel = AppDataSource.getRepository(ProductEntity);
+import { productModel } from './product.model';
 
 const getProducts = asyncHandler(async (req, res) => {
   const products = await productModel.find();

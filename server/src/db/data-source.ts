@@ -11,7 +11,7 @@ export const AppDataSource = new DataSource({
   type: 'sqlite',
   database: 'src/db/data/geekly_shop.sqlite',
   synchronize: true, // TODO: Disable in production because it drops the database
-  logging: true,
+  logging: false,
   entities: [UserEntity, ProductEntity, ReviewEntity, OrderEntity, ShippingAddressEntity, PaymentResultEntity],
   migrations: ['src/db/migrations/**/*.ts'],
   subscribers: [],

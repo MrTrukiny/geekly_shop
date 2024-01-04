@@ -1,4 +1,5 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 
 /* Routers */
 import authRouter from './auth/auth.router';
@@ -10,6 +11,7 @@ import { notFound, errorHandler } from '@/middlewares/error-handler.middleware';
 
 const server = express();
 
+server.use(cookieParser());
 server.use((_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
