@@ -8,6 +8,10 @@ import CartView from './sections/Cart/Cart.view';
 import LoginView from './sections/Login/Login.view';
 import RegisterView from './sections/Register/Register.view';
 
+import PrivateRoute from './components/PrivateRoute.component';
+import ShippingView from './sections/Shipping/Shipping.view';
+import PaymentView from './sections/Payment/Payment.view';
+
 export const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path="/" element={<App />}>
@@ -16,6 +20,12 @@ export const router = createBrowserRouter(
       <Route path="/cart" element={<CartView />} />
       <Route path="/login" element={<LoginView />} />
       <Route path="/register" element={<RegisterView />} />
+
+      {/* Registered users */}
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/shipping" element={<ShippingView />} />
+        <Route path="/payment" element={<PaymentView />} />
+      </Route>
     </Route>,
   ])
 );
