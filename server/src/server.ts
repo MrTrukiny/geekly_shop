@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 /* Routers */
@@ -11,12 +12,8 @@ import { notFound, errorHandler } from '@/middlewares/error-handler.middleware';
 
 const server = express();
 
+server.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 server.use(cookieParser());
-server.use((_req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
-
 server.use(express.json());
 server.use('/api/v1/auth', authRouter);
 server.use('/api/v1/users', userRouter);
