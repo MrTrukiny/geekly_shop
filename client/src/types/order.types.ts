@@ -1,4 +1,4 @@
-import { Cart } from './cart.types';
+import { Cart, CartItem } from './cart.types';
 import { User } from './user.types';
 
 export type Order = Omit<Cart, 'cartItems'> & {
@@ -26,7 +26,7 @@ type OrderItem = {
 };
 
 export type CreateOrderUnpaid = Omit<Cart, 'cartItems'> & {
-  orderItems: OrderItem[];
+  orderItems: CartItem[];
 };
 
 export type OrderUnpaid = Omit<Cart, 'cartItems'> & {

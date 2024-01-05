@@ -5,7 +5,7 @@ import { Button, Card, Col, Form, Image, ListGroup, Row } from 'react-bootstrap'
 
 /* Hooks & State */
 import { useAppDispatch } from '@/hooks';
-import { useGetProductDetailsQuery } from '@/state/slices/products-api.slice';
+import { useGetProductDetailsQuery } from '@/state/slices/product-api.slice';
 import { addToCart } from '@/state/slices/cart.slice';
 
 /* Components */

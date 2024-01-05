@@ -1,7 +1,7 @@
 import { SerializedError } from '@reduxjs/toolkit';
 import { Row, Col } from 'react-bootstrap';
 import Product from './Product.component';
-import { useGetProductsQuery } from '@/state/slices/products-api.slice';
+import { useGetProductsQuery } from '@/state/slices/product-api.slice';
 
 import Loader from './Loader.component';
 import Message from './Message.component';

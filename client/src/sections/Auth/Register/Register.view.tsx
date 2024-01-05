@@ -11,7 +11,7 @@ import Loader from '@/components/Loader.component';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useRegisterMutation } from '@/state/slices/auth-api.slice';
 import { setCredentials } from '@/state/slices/auth.slice';
-import { ApiError } from '@/state/shared.types';
+import { ApiError } from '@/types/shared.types';
 
 const RegisterView = () => {
   const dispatch = useAppDispatch();

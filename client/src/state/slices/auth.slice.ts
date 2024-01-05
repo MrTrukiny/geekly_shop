@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { UserCredentials } from '@/types/auth.types';
 import { User } from '@/types/user.types';
 
 type AuthSliceState = {
@@ -13,7 +14,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<User>) => {
+    setCredentials: (state, action: PayloadAction<UserCredentials>) => {
       state.userInfo = action.payload;
     },
     logout: (state) => {

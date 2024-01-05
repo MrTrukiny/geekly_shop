@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
 import { FaTrash } from 'react-icons/fa';
+import { Product } from '@/types/product.types';
 
 /* Components */
 import Message from '@/components/Message.component';
@@ -8,9 +9,6 @@ import Message from '@/components/Message.component';
 /* Hooks & State */
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { addToCart, removeFromCart } from '@/state/slices/cart.slice';
-
-/* Types */
-import { Product } from '@/state/product.types';
 
 const CartView = () => {
   const navigate = useNavigate();
