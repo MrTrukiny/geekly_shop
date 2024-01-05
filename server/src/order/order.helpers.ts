@@ -1,10 +1,10 @@
-import { CreateCartCommand } from './order.types';
+import { CreateOrderItemCommand } from './order.types';
 
 const addDecimals = (num: number) => {
   return Number((Math.round(num * 100) / 100).toFixed(2));
 };
 
-export const calculatePrices = (orderItems: CreateCartCommand[]) => {
+export const calculatePrices = (orderItems: CreateOrderItemCommand[]) => {
   // Calculate the items price in whole number (pennies) to avoid issues with floating point number calculations
   const itemsPrice = orderItems.reduce((acc, item) => acc + (item.price * 100 * item.quantity) / 100, 0);
   const shippingPrice = itemsPrice > 100 ? 0 : 10;

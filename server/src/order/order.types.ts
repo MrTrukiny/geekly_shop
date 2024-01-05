@@ -16,19 +16,19 @@ export interface CreateOrderDto {
   isDelivered: boolean;
   deliveredAt?: Date;
   status: OrderStatus;
-  orderItems: CreateCartDto[];
+  orderItems: CreateOrderItemDto[];
   shippingAddress: CreateShippingAddressDto;
   user: number;
 }
 
-export interface CreateCartDto {
+export interface CreateOrderItemDto {
   id: number;
   quantity: number;
   price: number;
 }
 
-export interface CreateCartCommand {
-  product: number;
+export interface CreateOrderItemCommand {
+  id: number;
   quantity: number;
   price: number;
 }

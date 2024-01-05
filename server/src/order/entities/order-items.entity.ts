@@ -2,8 +2,8 @@ import { Entity, PrimaryGeneratedColumn, ManyToOne, Column, JoinColumn } from 't
 import { OrderEntity } from './order.entity';
 import { ProductEntity } from '@/product/product.entity';
 
-@Entity('cart')
-export class CartEntity {
+@Entity('order_items')
+export class OrderItemEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

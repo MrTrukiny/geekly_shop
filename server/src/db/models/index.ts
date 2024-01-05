@@ -3,7 +3,7 @@ import {
   ProductEntity,
   OrderEntity,
   UserEntity,
-  CartEntity,
+  OrderItemEntity,
   ShippingAddressEntity,
   PaymentResultEntity,
   ReviewEntity,
@@ -12,9 +12,9 @@ import {
 const productModel = AppDataSource.getRepository(ProductEntity);
 const orderModel = AppDataSource.getRepository(OrderEntity);
 const userModel = AppDataSource.getRepository(UserEntity);
-const cartModel = AppDataSource.getRepository(CartEntity);
+const orderItemsModel = AppDataSource.getRepository(OrderItemEntity);
 const shippingAddressModel = AppDataSource.getRepository(ShippingAddressEntity);
 const paymentResultModel = AppDataSource.getRepository(PaymentResultEntity);
 const reviewModel = AppDataSource.getRepository(ReviewEntity);
 
-export { productModel, orderModel, userModel, cartModel, shippingAddressModel, paymentResultModel, reviewModel };
+export { productModel, orderModel, userModel, orderItemsModel, shippingAddressModel, paymentResultModel, reviewModel };

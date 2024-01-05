@@ -10,7 +10,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { OrderStatus } from '../order.types';
-import { CartEntity, ShippingAddressEntity, PaymentResultEntity, UserEntity } from '@/db/entities';
+import { OrderItemEntity, ShippingAddressEntity, PaymentResultEntity, UserEntity } from '@/db/entities';
 
 @Entity('orders')
 export class OrderEntity {
@@ -38,7 +38,7 @@ export class OrderEntity {
   @Column({ type: 'date', nullable: true })
   paidAt?: Date;
 
-  @Column({ type: 'boolean' })
+  @Column({ type: 'boolean', default: false })
   isDelivered!: boolean;
 
   @Column({ type: 'date', nullable: true })
@@ -52,8 +52,8 @@ export class OrderEntity {
   status!: OrderStatus;
 
   /* Relations */
-  @OneToMany(() => CartEntity, (orderItem) => orderItem.order, { cascade: true })
-  orderItems!: CartEntity[];
+  @OneToMany(() => OrderItemEntity, (orderItem) => orderItem.order, { cascade: true })
+  orderItems!: OrderItemEntity[];
 
   @OneToOne(() => ShippingAddressEntity, (shippingAddress) => shippingAddress.order, { cascade: true })
   @JoinColumn()
