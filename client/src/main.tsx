@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
+import { HelmetProvider } from 'react-helmet-async';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 import { router } from './routes.tsx';
@@ -12,12 +13,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <PayPalScriptProvider deferLoading={true} options={{ clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID }}>
-          <RouterProvider router={router} />
-        </PayPalScriptProvider>
-      </PersistGate>
-    </Provider>
+    <HelmetProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <PayPalScriptProvider deferLoading={true} options={{ clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID }}>
+            <RouterProvider router={router} />
+          </PayPalScriptProvider>
+        </PersistGate>
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>
 );

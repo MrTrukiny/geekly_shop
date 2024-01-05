@@ -38,6 +38,7 @@ const OrderView = () => {
     };
 
     if (order && !order.isPaid) {
+      console.log('order', order);
       if (!window.paypal) {
         loadPaypalScript();
       }
@@ -58,6 +59,7 @@ const OrderView = () => {
 
           try {
             await payOrder({ orderId: orderId as string, paymentDetails });
+
             refetch();
             toast.success('Order is paid');
           } catch (error) {
@@ -105,6 +107,7 @@ const OrderView = () => {
 
   const deliverHandler = async () => {
     await deliverOrder(orderId as string);
+
     refetch();
   };
 

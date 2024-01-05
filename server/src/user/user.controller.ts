@@ -98,7 +98,7 @@ const getUserById = asyncHandler(async (req, res) => {
 
 const updateUser = asyncHandler(async (req, res) => {
   const { userId } = req.params;
-  const { email, password, isAdmin } = req.body;
+  const { email, isAdmin } = req.body;
 
   const user = await await userModel
     .createQueryBuilder('user')
@@ -114,7 +114,6 @@ const updateUser = asyncHandler(async (req, res) => {
   const updatedUser = await userModel.save({
     ...user,
     email: email || user.email,
-    password: (await encryptPassword(password)) || user.password,
     isAdmin: Boolean(isAdmin),
   });
 

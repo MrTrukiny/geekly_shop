@@ -4,7 +4,7 @@ import { OrderItemEntity } from '@/order/entities/order-items.entity';
 import { PaymentResultEntity } from '@/order/entities/payment-result.entity';
 import { ShippingAddressEntity } from '@/order/entities/shipping-address.entity';
 import { UserEntity } from '@/user/user.entity';
-import { ReviewEntity } from '@/user/review/review.entity';
+import { ReviewEntity } from '@/product/review/review.entity';
 
 export const entities = [
   ProductEntity,

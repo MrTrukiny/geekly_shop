@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useLogoutMutation } from '@/state/slices/auth-api.slice';
 import { logout } from '@/state/slices/auth.slice';
 import { resetCart } from '@/state/slices/cart.slice';
+import SearchBox from './SearchBox.component';
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -37,8 +38,9 @@ const Header = () => {
             <Navbar.Brand>Geekly Shop</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+          <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+              <SearchBox />
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <FaShoppingCart /> Cart
@@ -65,6 +67,23 @@ const Header = () => {
                     <FaUser /> Sign In
                   </Nav.Link>
                 </LinkContainer>
+              )}
+
+              {/* Admin Links */}
+              {userInfo && userInfo.isAdmin && (
+                <>
+                  <NavDropdown title="Admin" id="adminmenu">
+                    <LinkContainer to="/admin/products">
+                      <NavDropdown.Item>Products</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/admin/orders">
+                      <NavDropdown.Item>Orders</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/admin/users">
+                      <NavDropdown.Item>Users</NavDropdown.Item>
+                    </LinkContainer>
+                  </NavDropdown>
+                </>
               )}
             </Nav>
           </Navbar.Collapse>

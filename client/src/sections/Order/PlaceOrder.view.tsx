@@ -2,17 +2,18 @@ import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Row, Col, ListGroup, Card, Button, Image } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import { ApiError } from '@/types/shared.types';
 
 /* Components */
 import CheckoutSteps from '@/components/CheckoutSteps.component';
 import Loader from '@/components/Loader.component';
 import Message from '@/components/Message.component';
 
-/* Hooks & Types */
+/* Hooks & State */
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { clearCartItems } from '@/state/slices/cart.slice';
 import { useCreateOrderMutation } from '@/state/slices/order-api.slice';
-import { ApiError } from '@/types/shared.types';
+
 
 const PlaceOrderView = () => {
   const dispatch = useAppDispatch();

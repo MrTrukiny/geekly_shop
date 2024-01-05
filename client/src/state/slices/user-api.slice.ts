@@ -1,6 +1,6 @@
 import { USERS_URL } from '@/constants';
 import { apiSlice } from './api.slice';
-import { UpdateUserProfile, User, UserProfile } from '@/types/user.types';
+import { AdminUpdateUser, UpdateUserProfile, User, UserProfile } from '@/types/user.types';
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -36,7 +36,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
-    updateUser: builder.mutation<User, { userId: string; userData: User }>({
+    updateUser: builder.mutation<User, { userId: string; userData: AdminUpdateUser }>({
       query: ({ userId, userData }) => ({
         url: `${USERS_URL}/${userId}`,
         method: 'PUT',

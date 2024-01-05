@@ -9,6 +9,19 @@ const userModel = AppDataSource.getRepository(UserEntity);
 const registerUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
+  // Validate email and password
+  if (!email || !password) {
+    res.status(400);
+    throw new Error('Email and password are required');
+  }
+
+  // Validate email
+  const emailRegex = /\S+@\S+\.\S+/;
+  if (!emailRegex.test(email)) {
+    res.status(400);
+    throw new Error('Invalid email');
+  }
+
   const existingUser = await userModel.findOneBy({ email });
 
   if (existingUser) {

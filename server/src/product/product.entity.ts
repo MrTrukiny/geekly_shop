@@ -27,14 +27,14 @@ export class ProductEntity {
   @Column({ type: 'int' })
   countInStock!: number;
 
-  @Column({ type: 'float' })
+  @Column({ type: 'float', nullable: true })
   rating!: number;
 
   @Column({ type: 'int' })
   numReviews!: number;
 
   /* Relations */
-  @ManyToOne(() => UserEntity, (user) => user.products)
+  @ManyToOne(() => UserEntity, (user) => user.products, { onDelete: 'CASCADE' })
   createdBy!: UserEntity;
 
   /* Timestamps */

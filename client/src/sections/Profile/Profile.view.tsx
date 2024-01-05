@@ -100,12 +100,13 @@ const ProfileView = () => {
         </Form>
       </Col>
       <Col md={9}>
+
         <h2>My Orders</h2>
         {isLoadingOrders ? (
           <Loader />
         ) : error ? (
           <Message variant="danger">
-            {(error as ApiError).data.message || 'Unexpected error ocurred loading orders'}
+            {(error as ApiError).data.message || 'Unexpected error ocurred loading Orders. Please try again.'}
           </Message>
         ) : (
           <Table striped hover responsive className="table-sm">

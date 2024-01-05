@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { OrderEntity } from '@/order/entities/order.entity';
-import { ReviewEntity } from '@/user/review/review.entity';
+import { ReviewEntity } from '@/product/review/review.entity';
 import { ProductEntity } from '@/product/product.entity';
 
 @Entity('users')
@@ -19,13 +19,13 @@ export class UserEntity {
   isAdmin!: boolean;
 
   /* Relations */
-  @OneToMany(() => ProductEntity, (product) => product.createdBy)
+  @OneToMany(() => ProductEntity, (product) => product.createdBy, { onDelete: 'CASCADE' })
   products!: ProductEntity[];
 
-  @OneToMany(() => OrderEntity, (order) => order.user)
+  @OneToMany(() => OrderEntity, (order) => order.user, { onDelete: 'CASCADE' })
   orders!: OrderEntity[];
 
-  @OneToMany(() => ReviewEntity, (review) => review.user)
+  @OneToMany(() => ReviewEntity, (review) => review.user, { onDelete: 'CASCADE' })
   reviews!: ReviewEntity[];
 
   /* Timestamps */
