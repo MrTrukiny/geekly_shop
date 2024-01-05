@@ -107,7 +107,7 @@ const getOrderById = asyncHandler(async (req, res) => {
 
   const order = await orderModel.findOne({
     where: { id: Number(orderId) },
-    relations: { user: true, orderItems: true, shippingAddress: true, paymentResult: true },
+    relations: { user: true, orderItems: { product: true }, shippingAddress: true, paymentResult: true },
   });
 
   if (!order) {
@@ -129,12 +129,14 @@ const updateOrderPayment = asyncHandler(async (req: ReqUpdateOrderPaymentBody, r
   const { verified, value } = await verifyPayPalPayment(paymentId);
 
   if (!verified) {
+    res.status(404);
     throw new Error('Payment not verified');
   }
 
   const isNewTransaction = await verifyNewTransaction(orderModel, paymentId);
 
   if (!isNewTransaction) {
+    res.status(404);
     throw new Error('Transaction has been used before');
   }
 
@@ -148,6 +150,7 @@ const updateOrderPayment = asyncHandler(async (req: ReqUpdateOrderPaymentBody, r
   const paidCorrectAmount = order.totalPrice.toString() === value;
 
   if (!paidCorrectAmount) {
+    res.status(404);
     throw new Error('Incorrect amount paid');
   }
 
@@ -161,6 +164,7 @@ const updateOrderPayment = asyncHandler(async (req: ReqUpdateOrderPaymentBody, r
   const savedPaymentResult = await paymentResultModel.save(paymentResult);
 
   if (!savedPaymentResult) {
+    res.status(404);
     throw new Error('There was a problem saving the payment result');
   }
 

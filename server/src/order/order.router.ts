@@ -20,7 +20,7 @@ orderRouter.route('/:orderId').get(isAuthenticated, getOrderById);
 
 /* Admin routes */
 orderRouter.route('/').get(isAuthenticated, isAdmin, getOrders);
-orderRouter.route('/:orderId/pay').put(isAuthenticated, isAdmin, updateOrderPayment);
+orderRouter.route('/:orderId/pay').put(isAuthenticated, updateOrderPayment);
 orderRouter.route('/:orderId/deliver').put(isAuthenticated, isAdmin, updateOrderDelivery);
 
 export default orderRouter;

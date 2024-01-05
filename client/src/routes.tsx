@@ -12,6 +12,7 @@ import PrivateRoute from './components/PrivateRoute.component';
 import ShippingView from './sections/Shipping/Shipping.view';
 import PaymentView from './sections/Payment/Payment.view';
 import PlaceOrderView from './sections/Order/PlaceOrder.view';
+import OrderView from './sections/Order/Order.view';
 
 export const router = createBrowserRouter(
   createRoutesFromElements([
@@ -27,6 +28,7 @@ export const router = createBrowserRouter(
         <Route path="/shipping" element={<ShippingView />} />
         <Route path="/payment" element={<PaymentView />} />
         <Route path="/place-order" element={<PlaceOrderView />} />
+        <Route path="/order/:id" element={<OrderView />} />
       </Route>
     </Route>,
   ])

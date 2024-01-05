@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 import { router } from './routes.tsx';
 import { store, persistor } from './state/store.ts';
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <RouterProvider router={router} />
+        <PayPalScriptProvider deferLoading={true} options={{ clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID }}>
+          <RouterProvider router={router} />
+        </PayPalScriptProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>

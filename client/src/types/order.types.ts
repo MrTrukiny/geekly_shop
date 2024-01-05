@@ -1,8 +1,9 @@
-import { Cart, CartItem } from './cart.types';
+import { Cart } from './cart.types';
+import { User } from './user.types';
 
 export type Order = Omit<Cart, 'cartItems'> & {
   id: number;
-  orderItems: CartItem[];
+  orderItems: OrderItem[];
   isPaid: boolean;
   paidAt: Date | null;
   paymentResult: PaymentResult | null;
@@ -10,18 +11,29 @@ export type Order = Omit<Cart, 'cartItems'> & {
   deliveredAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
-  user: string;
+  user: User;
+};
+
+type OrderItem = {
+  id: number;
+  quantity: number;
+  price: number;
+  product: {
+    id: number;
+    name: string;
+    image: string;
+  };
 };
 
 export type CreateOrderUnpaid = Omit<Cart, 'cartItems'> & {
-  orderItems: CartItem[];
+  orderItems: OrderItem[];
 };
 
 export type OrderUnpaid = Omit<Cart, 'cartItems'> & {
   id: number;
-  orderItems: CartItem[];
+  orderItems: OrderItem[];
   isPaid: boolean;
-  user: string;
+  user: User;
 };
 
 export type OrderPaid = OrderUnpaid & {

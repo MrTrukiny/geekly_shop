@@ -23,6 +23,7 @@ async function getPayPalAccessToken() {
   };
 
   const body = 'grant_type=client_credentials';
+
   const response = await fetch(url, {
     method: 'POST',
     headers,
