@@ -4,10 +4,10 @@ import { asyncHandler } from '@/middlewares/async-handler.middleware';
 /* Helpers & Types */
 import { calculatePrices } from './order.helpers';
 import { RequestWithUser } from '@/types/api.types';
-import { CreateCartCommand, ReqCreateOrderBody, ReqUpdateOrderPaymentBody } from './order.types';
+import { CreateOrderItemCommand, ReqCreateOrderBody, ReqUpdateOrderPaymentBody } from './order.types';
 
 /* Models */
-import { productModel, orderModel, paymentResultModel, shippingAddressModel } from '@/db/models';
+import { productModel, orderModel, paymentResultModel, shippingAddressModel, orderItemsModel } from '@/db/models';
 
 /* Services */
 import { verifyNewTransaction, verifyPayPalPayment } from '@/lib/paypal.service';
@@ -18,7 +18,7 @@ const createOrder = asyncHandler(async (req: ReqCreateOrderBody, res) => {
 
   if (orderItems?.length === 0) {
     res.status(400);
-    throw new Error('The Cart is empty!');
+    throw new Error('The Order Items is empty!');
   }
 
   // NOTE: here we must assume that the prices from our client are incorrect.
@@ -29,7 +29,7 @@ const createOrder = asyncHandler(async (req: ReqCreateOrderBody, res) => {
   const dbItems = await productModel.findBy({ id: In(orderItems.map((item) => item.id)) });
 
   // map over the order items and use the price from our items from database
-  const dbOrderItems: CreateCartCommand[] = orderItems.map((clientItem) => {
+  const dbOrderItem: CreateOrderItemCommand[] = orderItems.map((clientItem) => {
     const matchingItem = dbItems.find((dbItem) => dbItem.id === clientItem.id);
 
     if (!matchingItem) {
@@ -38,13 +38,13 @@ const createOrder = asyncHandler(async (req: ReqCreateOrderBody, res) => {
     }
 
     return {
-      product: matchingItem.id,
+      id: matchingItem.id,
       quantity: clientItem.quantity,
       price: matchingItem.price,
     };
   });
 
-  const { itemsPrice, taxPrice, shippingPrice, totalPrice } = calculatePrices(dbOrderItems);
+  const { itemsPrice, taxPrice, shippingPrice, totalPrice } = calculatePrices(dbOrderItem);
 
   if (!user) {
     res.status(404);
@@ -65,7 +65,19 @@ const createOrder = asyncHandler(async (req: ReqCreateOrderBody, res) => {
     throw new Error('There was a problem saving the shipping address');
   }
 
+  const newOrderItem = dbOrderItem.map((item) => {
+    return orderItemsModel.create({
+      product: { id: item.id },
+      quantity: item.quantity,
+      price: item.price,
+    });
+  });
+
+  const savedOrderItem = await orderItemsModel.save(newOrderItem);
+
   const order = await orderModel.save({
+    orderItems: savedOrderItem,
+    shippingAddress: savedShippingAddress,
     paymentMethod,
     itemsPrice,
     taxPrice,
@@ -73,7 +85,6 @@ const createOrder = asyncHandler(async (req: ReqCreateOrderBody, res) => {
     totalPrice,
     isPaid: false,
     user,
-    shippingAddress: savedShippingAddress,
   });
 
   res.status(201).json(order);
