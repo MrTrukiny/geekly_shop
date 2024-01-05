@@ -1,7 +1,7 @@
 import { AUTH_URL } from '@/constants';
 import { apiSlice } from './api.slice';
-import { User } from '../user.types';
-import { LoginUser, RegisterUser } from '../auth.types';
+import { User } from '@/types/user.types';
+import { LoginUser, RegisterUser } from '@/types/auth.types';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

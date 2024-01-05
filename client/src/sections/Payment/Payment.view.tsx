@@ -44,7 +44,7 @@ const PaymentScreen = () => {
               label="PayPal or Credit Card"
               id="PayPal"
               name="paymentMethod"
-              value="PayPal"
+              value="paypal"
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>

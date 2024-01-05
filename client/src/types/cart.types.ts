@@ -11,6 +11,7 @@ export type Cart = {
 };
 
 export type CartItem = Product & {
+  productId: number;
   quantity: number;
 };
 
@@ -20,5 +21,3 @@ export type ShippingAddress = {
   postalCode: string;
   country: string;
 };
-
-

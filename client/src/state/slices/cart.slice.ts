@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Cart, CartItem, ShippingAddress } from '../cart.types';
+import { Cart, CartItem, ShippingAddress } from '@/types/cart.types';
 import { updateCart } from './cart-slice.helper';
 
 export type CartSliceState = Cart;
