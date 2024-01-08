@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "description": "E-commerce responsive web application built with TypeScript, React, Express and SQLite",
   "scripts": {
-    "start": "node server/dist/index.js",
-    "client": "cd client && npm start",
-    "server": "cd server && npm start",
+    "start": "concurrently \"cd client && npm start\" \"cd server && npm start\"",
     "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\"",
+    "start-server": "node server/dist/index.js",
     "lint": "concurrently \"cd client && npm run lint\" \"cd server && npm run lint\"",
-    "build": "npm install && npm install --prefix client && npm run build --prefix client && npm install --prefix server && npm run build --prefix server"
+    "build": "npm install && npm install --prefix client && npm run build --prefix client && npm install --prefix server && npm run build --prefix server",
+    "build-client": "npm install --prefix client && npm run build --prefix client",
+    "build-server": "npm install --prefix server && npm run build --prefix server"
   },
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/MrTrukiny/geekly_shop.git"

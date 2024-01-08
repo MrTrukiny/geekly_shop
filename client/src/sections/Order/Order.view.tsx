@@ -38,7 +38,6 @@ const OrderView = () => {
     };
 
     if (order && !order.isPaid) {
-      console.log('order', order);
       if (!window.paypal) {
         loadPaypalScript();
       }

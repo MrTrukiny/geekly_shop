@@ -9,7 +9,8 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { router } from './routes.tsx';
 import { store, persistor } from './state/store.ts';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/styles/bootstrap.custom.css';
+import './assets/styles/index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

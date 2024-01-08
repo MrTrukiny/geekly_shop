@@ -1,16 +1,12 @@
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { Request, Router } from 'express';
 import multer, { FileFilterCallback } from 'multer';
 
 const assetRouter = Router();
 
-const uploadsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'uploads');
-console.log(uploadsPath);
-
 const storage = multer.diskStorage({
   destination(_req, _file, cb) {
-    cb(null, uploadsPath);
+    cb(null, 'uploads/');
   },
   filename(_req, file, cb) {
     const fileName = `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`;

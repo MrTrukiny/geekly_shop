@@ -34,7 +34,8 @@ async function getPayPalAccessToken() {
     throw new Error('Failed to get access token');
   }
 
-  const paypalData = await response.json();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const paypalData: any = await response.json();
 
   return paypalData.access_token;
 }
@@ -84,7 +85,8 @@ const verifyPayPalPayment = async (paypalTransactionId: string) => {
     throw new Error('Failed to verify payment');
   }
 
-  const paypalData = await paypalResponse.json();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const paypalData: any = await paypalResponse.json();
 
   return {
     verified: paypalData.status === 'COMPLETED',

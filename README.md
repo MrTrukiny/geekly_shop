@@ -20,4 +20,23 @@ You can use my Paypal sandbox personal credentials to run mock payments using th
 - email: sb-wakos29048563@personal.example.com password: JE>&5olo
 
 
+## Functionalities
+- As a User:
+  - See All Products, Search Products, see Product Details, Add and remove products from Cart, Purchase Products.
+  - See Profile, see Orders and their information.
+  - Add Reviews to Products.
+- As and Admin:
+  - All the capabilities of a regular User, plus:
+    - See All products, edit them, and delete them.
+    - See All Orders and mark them as delivered.
+    - See all Users, edit them and delete them.
+
+
 ### Missing things
+- Unit and Integration tests.
+- Client and Server validations on forms.
+- Some other things that I really would change if this was a real life application.
+
+
+### Last Words
+Thank you for this opportunity, I enjoyed to do this e-commerce app. It was a good refresher.

@@ -65,8 +65,6 @@ const createProductReview = asyncHandler(async (req, res) => {
   const { productId } = req.params;
   const { rating, comment } = req.body;
 
-  console.log(rating, comment);
-
   const product = await productModel.findOneBy({ id: Number(productId) });
 
   if (!product) {

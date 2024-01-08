@@ -82,8 +82,6 @@ const ProductEditView = () => {
     try {
       const res = await uploadProductImage(formData).unwrap();
 
-      console.log(res);
-
       toast.success(res.message);
       setImage(res.image);
     } catch (error) {
