@@ -14,7 +14,6 @@ import { useAppDispatch, useAppSelector } from '@/hooks';
 import { clearCartItems } from '@/state/slices/cart.slice';
 import { useCreateOrderMutation } from '@/state/slices/order-api.slice';
 
-
 const PlaceOrderView = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -130,17 +129,19 @@ const PlaceOrderView = () => {
                   <Col>${cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
-              <ListGroup.Item>
-                {error && (
+
+              {error && (
+                <ListGroup.Item>
                   <Message variant="danger">
                     {(error as ApiError).data?.message || 'Unexpected error ocurred. Please try again.'}
                   </Message>
-                )}
-              </ListGroup.Item>
+                </ListGroup.Item>
+              )}
+
               <ListGroup.Item>
                 <Button
                   type="button"
-                  className="btn-block"
+                  className="btn-block btn-center"
                   disabled={cart.cartItems.length === 0}
                   onClick={placeOrderHandler}
                 >

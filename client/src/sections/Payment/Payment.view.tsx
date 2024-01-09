@@ -14,7 +14,7 @@ const PaymentScreen = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [paymentMethod, setPaymentMethod] = useState('PayPal');
+  const [paymentMethod, setPaymentMethod] = useState('paypal');
   const cart = useAppSelector((state) => state.cart);
   const { shippingAddress } = cart;
 

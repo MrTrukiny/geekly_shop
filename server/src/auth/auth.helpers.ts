@@ -13,7 +13,7 @@ export const generateToken = (res: Response, userId: number) => {
   res.cookie('jwt', token, {
     httpOnly: true,
     secure: process.env.NODE_ENV !== 'development', // TODO: Use secure cookies in production because it requires HTTPS.
-    sameSite: 'strict', // Prevent CSRF attacks by setting the cookie to 'strict' or 'lax' in production
+    sameSite: 'none', // Prevent CSRF attacks by setting the cookie to 'strict' or 'lax' in production
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
   });
 };

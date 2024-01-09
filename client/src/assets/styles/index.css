@@ -51,3 +51,9 @@ table th {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
 }
+
+.btn-center {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+}

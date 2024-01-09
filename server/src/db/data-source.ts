@@ -6,7 +6,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 export const AppDataSource = new DataSource({
   type: 'sqlite',
-  database: isProduction ? 'db/data/geekly_shop.sqlite' : 'src/db/data/geekly_shop.sqlite',
+  // Use LiteFS if running in production, otherwise use local file system
+  database: isProduction ? '/litefs/geekly_shop.sqlite' : './src/db/data/geekly_shop.sqlite',
   synchronize: true, // TODO: Disable in production because it drops the database
   logging: false,
   entities: [...entities],
